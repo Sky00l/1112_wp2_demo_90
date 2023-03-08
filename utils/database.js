@@ -8,9 +8,10 @@ if(process.env.NODE_ENV === 'SUPABASE') {
         host: process.env.SUPABASE_HOST,
         port: '5432',
         database: 'postgres',
-        password: '0000'
+        password: process.env.SUPABASE_PASSWORD,
     });
-    console.log(`Connecting PostgreSQL database `)
+    console.log(`Connecting PostgreSQL database ${pool.options.database}`);
+
 }else{
     pool = new Pool({
         user: 'postgres',
@@ -19,9 +20,8 @@ if(process.env.NODE_ENV === 'SUPABASE') {
         database: 'wp2_demo_90',
         password: '0000'
     });
+    console.log(`Connecting local PostgreSQL database ${pool.options.database}`);
 }
 
-
-console.log(`Connecting PostgreSQL database  ${pool.options.database}`);
 
 module.exports = pool;
